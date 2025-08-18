@@ -31,8 +31,7 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build --platform=linux/amd64
-          -t ${{ secrets.DOCKER_USERNAME }}/template-cv-next:latest .
+        docker build --platform=linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/template-cv-next:latest .
         docker push ${{ secrets.DOCKER_USERNAME }}/template-cv-next:latest
 
   report-status:
