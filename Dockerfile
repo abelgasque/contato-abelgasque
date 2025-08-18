@@ -30,7 +30,7 @@ COPY --from=builder /app/public public
 COPY --from=builder /app/node_modules node_modules
 
 # Define a porta exposta
-EXPOSE 80
+EXPOSE 10000
 
 # Comando para iniciar o servidor Next.js
 CMD ["npm", "run", "start"]
