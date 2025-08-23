@@ -1,6 +1,9 @@
 {
   "name": "bolby-protfolio-angular",
   "version": "v1.1.0",
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
