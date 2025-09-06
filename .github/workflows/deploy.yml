@@ -1,0 +1,77 @@
+name: Build and Deploy Firebase Production
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build and Deploy production
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Notify Discord (Build Started)
+      run: |
+        curl -H "Content-Type: application/json" \
+        -X POST \
+        -d '{"username": "Bot GitHub", "content": "🚀 **Deploy iniciado!**\nRepositório: `${{ github.repository }}`\nAmbiente: Produção\nBranch: `${{ github.ref_name }}`"}' \
+        ${{ secrets.DISCORD_WEBHOOK_URL }} || true
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm install --legacy-peer-deps
+
+    - name: Build for Deploy project
+      run: npm run deploy
+      env:
+        GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+        GITHUB_URL: ${{ secrets.GIT_URL }}
+        GITHUB_USERNAME: ${{ github.actor }}
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+        FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+        FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+        FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
+        FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+        FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+        FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
+
+    - name: Install Firebase CLI
+      run: npm install -g firebase-tools
+
+    - name: Deploy to Firebase Hosting
+      run: firebase deploy --token "${{ secrets.FIREBASE_TOKEN }}"
+
+  report-status:
+    name: Report Build Status
+    needs: build
+    environment: production
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Notify Discord (Success)
+      if: success()
+      run: |
+        curl -H "Content-Type: application/json" \
+        -X POST \
+        -d '{"username": "Bot Github", "content": "✅ **Deploy realizado com sucesso!**\nRepositório: `${{ github.repository }}`\nAmbiente: Produção\nBranch: `${{ github.ref_name }}`"}' \
+        ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+    - name: Notify Discord (Failure)
+      if: failure()
+      run: |
+        curl -H "Content-Type: application/json" \
+        -X POST \
+        -d '{"username": "Bot Github", "content": "❌ **Falha no deploy!**\nRepositório: `${{ github.repository }}`\nAmbiente: Produção\nBranch: `${{ github.ref_name }}`"}' \
+        ${{ secrets.DISCORD_WEBHOOK_URL }}

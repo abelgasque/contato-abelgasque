@@ -1,0 +1,53 @@
+<div class="container">
+  <!-- section title -->
+  <h2 class="section-title wow fadeInUp">Projetos</h2>
+  <div class="spacer-60"></div>
+
+  <!-- portfolio filter (desktop) -->
+  <ul class="portfolio-filter list-inline wow fadeInUp">
+    <li class="list-inline-item" [ngClass]="{ current: workFilter === 'all' }" (click)="workFilter = 'all'">
+      Todos
+    </li>
+    <li class="list-inline-item" *ngFor="let lang of languages" [ngClass]="{ current: workFilter === lang }"
+      (click)="workFilter = lang">
+      {{ lang }}
+    </li>
+  </ul>
+
+  <!-- portfolio filter (mobile) -->
+  <div class="pf-filter-wrapper">
+    <select class="portfolio-filter-mobile" (change)="onChange($event)">
+      <option value="all">Todos</option>
+      <option *ngFor="let lang of languages" [value]="lang">
+        {{ lang }}
+      </option>
+    </select>
+  </div>
+
+  <!-- portfolio wrapper -->
+  <div class="row portfolio-wrapper">
+    <ng-container *ngFor="let repo of repos">
+      <div class="col-md-4 col-sm-6 col-12 grid-item"
+        *ngIf="workFilter === 'all' || workFilter.toLowerCase() === (repo.language?.toLowerCase() || 'all')">
+        <a href="#" class="work-link" (click)="openRepo(repo.html_url, 'GitHub Repo')">
+          <div class="portfolio-item rounded shadow-dark">
+            <div class="details">
+              <span class="term">{{ repo.language || 'Repository' }}</span>
+              <h4 class="title">{{ repo.name }}</h4>
+              <span class="more-button"><i class="icon-link"></i></span>
+            </div>
+            <div class="thumb">
+              <img [src]="'assets/images/projects/' + repo.name + '.svg'" [alt]="repo.name" />
+              <div class="mask"></div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- more button -->
+  <div class="load-more text-center mt-4" *ngIf="repos.length === 0">
+    <a href="javascript:" class="btn btn-default"><i class="fas fa-spinner"></i> Carregando...</a>
+  </div>
+</div>
