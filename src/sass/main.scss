@@ -92,7 +92,7 @@ section.home {
   position: relative;
   &:before {
     content: '';
-    background-image: url(./../assets/images/dots-bg.svg);
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/cv-abelgasque-e8ab0.firebasestorage.app/o/assets%2Fdots-bg.svg?alt=media&token=88068add-f45c-420c-8b5d-ebce28134b46);
     display: block;
     height: 37px;
     left: -14px;
@@ -805,7 +805,7 @@ select.portfolio-filter-mobile {
 /*                      CONTACT                              
 /*=================================================================*/
 .contact-info {
-  background-image: url('./../assets/images/map.svg');
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/cv-abelgasque-e8ab0.firebasestorage.app/o/assets%2Fmap.svg?alt=media&token=579ed166-3bfc-4c89-917f-a81213aec35f');
   background-repeat: no-repeat;
   background-size: contain;
   min-height: 200px;

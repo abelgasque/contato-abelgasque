@@ -44,7 +44,7 @@ export class LayoutComponent implements OnInit {
   public desktopHeaderClass: string = 'desktop-header-1';
   public horizontalNavClass: string = 'navbar-dark';
 
-  public desktopLogo = 'assets/images/logo.svg';
+  public desktopLogo = 'https://firebasestorage.googleapis.com/v0/b/cv-abelgasque-e8ab0.firebasestorage.app/o/assets%2Flogo.svg?alt=media&token=eeca4a85-64ab-4239-a3e9-8435899f46da';
 
   public collapsedCard: string = 'collapsed';
 
@@ -68,10 +68,10 @@ export class LayoutComponent implements OnInit {
         this.desktopHeaderClass = 'desktop-header-1';
         switch (this.themeConfig.themeType) {
           case 'light':
-            this.desktopLogo = 'assets/images/logo-dark.svg';
+            this.desktopLogo = 'https://firebasestorage.googleapis.com/v0/b/cv-abelgasque-e8ab0.firebasestorage.app/o/assets%2Flogo-dark.svg?alt=media&token=16f7e79c-4abb-4319-a18d-e2b9c4f7b10b';
             break;
           default:
-            this.desktopLogo = 'assets/images/logo.svg';
+            this.desktopLogo = 'https://firebasestorage.googleapis.com/v0/b/cv-abelgasque-e8ab0.firebasestorage.app/o/assets%2Flogo.svg?alt=media&token=eeca4a85-64ab-4239-a3e9-8435899f46da';
         }
         break;
       case 'collapsed':
@@ -92,10 +92,10 @@ export class LayoutComponent implements OnInit {
         switch (this.themeConfig.themeType) {
           case 'light':
             this.horizontalNavClass = 'navbar-light';
-            this.desktopLogo = 'assets/images/logo-dark.svg';
+            this.desktopLogo = 'https://firebasestorage.googleapis.com/v0/b/cv-abelgasque-e8ab0.firebasestorage.app/o/assets%2Flogo-dark.svg?alt=media&token=16f7e79c-4abb-4319-a18d-e2b9c4f7b10b';
             break;
           default:
-            this.desktopLogo = 'assets/images/logo.svg';
+            this.desktopLogo = 'https://firebasestorage.googleapis.com/v0/b/cv-abelgasque-e8ab0.firebasestorage.app/o/assets%2Flogo.svg?alt=media&token=eeca4a85-64ab-4239-a3e9-8435899f46da';
         }
         break;
     }

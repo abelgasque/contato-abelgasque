@@ -26,7 +26,7 @@ export class AboutComponent implements OnInit {
     private analytics: Analytics,
     private dbService: DbService
   ) {
-    this.cvUrl = 'https://drive.google.com/file/d/1Upa047lvatHWlg2LhLozqgXMHMvKTSg4/view?usp=sharing';
+    this.cvUrl = 'https://firebasestorage.googleapis.com/v0/b/cv-abelgasque-e8ab0.firebasestorage.app/o/curriculo%2FCV_ABEL_GASQUE.pdf?alt=media&token=c0b2be7e-5a10-447f-85c5-7cdda258ff72';
     this.baseUrl = environment.github.api;
     this.token = environment.github.token;
     this.username = environment.github.username;
