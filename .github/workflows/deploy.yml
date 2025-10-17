@@ -3,7 +3,7 @@ name: Build and Deploy Firebase Production
 on:
   push:
     branches:
-      - main
+      - develop
     tags:
       - 'v*'
 
